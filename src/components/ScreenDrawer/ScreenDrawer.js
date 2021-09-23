@@ -36,6 +36,14 @@ function ScreenDrawer(props) {
         }
     },[currState, props.color, userInput, currImg, isRouteChange])
 
+    const inputHandler = (event) => {
+        const timeout = setTimeout(() => {
+            setUserInput(event.target.value);
+        }, 2000);
+        return () => {
+            clearTimeout(timeout);
+        }
+    }
     return(
         <div className={"ScreenDrawer"}>
             <select ref={selectRef} className={"DropdownList"} onChange={e => setCurrImg(e.target.value)}>
@@ -44,7 +52,7 @@ function ScreenDrawer(props) {
                     <option value={item.value} key={item.name}>{item.name}</option>
                 ))}
             </select>
-            <input ref={inputRef} type='text' placeholder={'Enter input'} onChange={e => setUserInput(e.target.value)}/> 
+            <input ref={inputRef} type='text' placeholder={'Enter input'} onChange={(event) => inputHandler(event)}/> 
             {currImg ? 
                 <DrawCanvas image={currImg} text={userInput} background={props.color}/> 
             : null}

@@ -9,11 +9,14 @@ function DrawCanvas(props) {
         const context = canvas.getContext("2d");
         const img = new Image();
         img.src = props.image;
+        
         img.onload = () => {
             context.drawImage(img, 10, 10);
             context.font = "50px courier";
             context.fillStyle = "white";
-            context.fillText(props.text, 210, 175);
+            context.textAlign = "center";
+            
+            context.fillText(props.text, 320, 180);
         }
     },[props.text, props.image ,canvasRef]);
 
